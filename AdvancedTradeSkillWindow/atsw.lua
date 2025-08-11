@@ -356,7 +356,7 @@ function ATSWFrame_OnEvent()
 				ATSWFilterButton:SetHeight(20)
 				ATSWFilterButton:SetWidth(70)
 			end
-			if (IsAddOnLoaded('Blizzard_TradeSkillUI') and getglobal('TradeSkillListScrollFrame')) then
+			if (IsAddOnLoaded('Blizzard_TradeSkillUI')) then
 				getglobal('TradeSkillListScrollFrame').offset = 0
 			end
 		elseif(event=="CRAFT_CLOSE") then
@@ -1282,16 +1282,32 @@ function ATSWFrame_UpdateQueue()
 		local queueName=getglobal("ATSWQueueItem"..i.."NameText");
 		local queueItem=getglobal("ATSWQueueItem"..i);
 		local queueButton=getglobal("ATSWQueueItem"..i.."DeleteButton");
+		local downButton=getglobal("ATSWQueueItem"..i.."DownButton");
+		local upButton=getglobal("ATSWQueueItem"..i.."UpButton")
 		if(atsw_queue[jobindex]) then
 			queueCount:SetText(atsw_queue[jobindex].count.."x");
 			queueName:SetText(atsw_queue[jobindex].name);
 			queueItem.jobindex=jobindex;
 			queueButton.jobindex=jobindex;
+			downButton.jobindex=jobindex;
+			upButton.jobindex=jobindex;
 			queueItem:Show();
 			queueButton:Show();
+			if(jobindex >= jobs) then
+				downButton:Hide();
 			else
+				downButton:Show();
+			end
+			if(jobindex <= 1) then
+				upButton:Hide();
+			else
+				upButton:Show();
+			end
+		else
 			queueButton:Hide();
 			queueItem:Hide();
+			downButton:Hide();
+			upButton:Hide();
 		end
 	end
 	
@@ -1350,6 +1366,34 @@ function ATSW_DeleteJob(jobindex)
 		if(FauxScrollFrame_GetOffset(ATSWQueueScrollFrame)>0 and FauxScrollFrame_GetOffset(ATSWQueueScrollFrame)+4>table.getn(atsw_queue)) then
 			FauxScrollFrame_SetOffset(ATSWQueueScrollFrame,FauxScrollFrame_GetOffset(ATSWQueueScrollFrame)-1);
 		end
+		if(atsw_preventupdate==false) then
+			ATSW_ResetPossibleItemCounts();
+			ATSWInv_UpdateQueuedItemList();
+			ATSWFrame_UpdateQueue();
+			ATSWFrame_Update();
+		end
+	end
+end
+
+function ATSW_MoveJobUp(jobindex)
+	if(jobindex > 1) then
+		local temp = atsw_queue[jobindex-1];
+		atsw_queue[jobindex-1] = atsw_queue[jobindex];
+		atsw_queue[jobindex] = temp;
+		if(atsw_preventupdate==false) then
+			ATSW_ResetPossibleItemCounts();
+			ATSWInv_UpdateQueuedItemList();
+			ATSWFrame_UpdateQueue();
+			ATSWFrame_Update();
+		end
+	end
+end
+
+function ATSW_MoveJobDown(jobindex)
+	if(jobindex < table.getn(atsw_queue)) then
+		local temp = atsw_queue[jobindex+1];
+		atsw_queue[jobindex+1] = atsw_queue[jobindex];
+		atsw_queue[jobindex] = temp;
 		if(atsw_preventupdate==false) then
 			ATSW_ResetPossibleItemCounts();
 			ATSWInv_UpdateQueuedItemList();
@@ -2162,9 +2206,34 @@ function ATSW_Filter(skillname)
 	end
 	for i=1,table.getn(parameters),1 do
 		if(parameters[i].name=="name") then
-			if(string.find(string.lower(skillname),".-"..string.lower(parameters[i].value)..".-")==nil) then
+			-- Search both recipe name and reagents by default ||| START OF CODE
+			local nameMatch = string.find(string.lower(skillname),".-"..string.lower(parameters[i].value)..".-");
+			local reagentMatch = false;
+
+			-- Check reagents if name doesn't match
+			if(nameMatch == nil) then
+				local index=ATSW_GetTradeSkillListPosByName(skillname);
+				if(index~=-1) then
+					for j=1,table.getn(atsw_tradeskilllist[index].reagents),1 do
+						if(string.find(string.lower(atsw_tradeskilllist[index].reagents[j].name),".-"..string.lower(parameters[i].value)..".-")~=nil) then
+							reagentMatch=true;
+							break;
+						end
+					end
+				end
+			end
+
+			-- Return false only if neither name nor reagents match
+			if(nameMatch == nil and reagentMatch == false) then
 				return false;
 			end
+			-- Search both recipe name and reagents by default ||| END OF CODE
+
+			--[[ ||| ORIGINAL CODE THAT DOES NOT COMBINE FILTERS
+			if(string.find(string.lower(skillname),".-"..string.lower(parameters[i].value)..".-")==nil) then
+    			return false;
+			end
+			]]
 		end
 		if(parameters[i].name=="reagent" or parameters[i].name=="r") then
 			local index=ATSW_GetTradeSkillListPosByName(skillname);
@@ -2706,7 +2775,7 @@ function ATSWShoppingListFrameOnUpdate()
 
 				if aux_frame and aux_frame:IsVisible() then
 			ATSWShoppingListFrame:ClearAllPoints();
-			ATSWShoppingListFrame:SetPoint("TOPRIGHT","aux_frame","BOTTOMRIGHT",0,0);
+			ATSWShoppingListFrame:SetPoint("TOPRIGHT","aux_frame","BOTTOMRIGHT", 28,-10);
 				else
 					ATSWShoppingListFrame:SetPoint("TOPLEFT","AuctionFrame","TOPLEFT",353,-436);
 		end
