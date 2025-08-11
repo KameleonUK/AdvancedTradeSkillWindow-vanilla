@@ -1639,10 +1639,68 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						ATSW_DeleteJob(this.jobindex);
+						ATSW_MoveJobDown(this.jobindex);
 					</OnClick>
+        			<OnEnter>
+            			GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+            			GameTooltip:SetText("Remove craft from the queue");
+            			GameTooltip:Show();
+        			</OnEnter>
+        			<OnLeave>
+            			GameTooltip:Hide();
+        			</OnLeave>					
 				</Scripts>
 			</Button>
+			<Button name="ATSWQueueItem1DownButton" inherits="UIPanelButtonTemplate" text="D">
+				<Size>
+					<AbsDimension x="20" y="22"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="ATSWQueueItem1DeleteButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-11" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ATSW_MoveJobDown(this.jobindex);
+					</OnClick>
+        			<OnEnter>
+            			GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+            			GameTooltip:SetText("Move craft down the queue");
+            			GameTooltip:Show();
+        			</OnEnter>
+        			<OnLeave>
+            			GameTooltip:Hide();
+        			</OnLeave>					
+				</Scripts>
+			</Button>
+			<Button name="ATSWQueueItem1UpButton" inherits="UIPanelButtonTemplate" text="U">
+				<Size>
+					<AbsDimension x="20" y="22"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="ATSWQueueItem1DownButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ATSW_MoveJobUp(this.jobindex);
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						GameTooltip:SetText("Move craft up the queue");
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>				
+				</Scripts>
+			</Button>			
 
 			<Frame name="ATSWQueueItem2" inherits="ATSWQueueItemButtonTemplate">
 				<Anchors>
@@ -1666,10 +1724,69 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						ATSW_DeleteJob(this.jobindex);
+						ATSW_MoveJobDown(this.jobindex);
 					</OnClick>
+        			<OnEnter>
+            			GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+            			GameTooltip:SetText("Remove craft from the queue");
+            			GameTooltip:Show();
+        			</OnEnter>
+        			<OnLeave>
+            			GameTooltip:Hide();
+        			</OnLeave>					
 				</Scripts>
 			</Button>
+			<Button name="ATSWQueueItem2DownButton" inherits="UIPanelButtonTemplate" text="D">
+				<Size>
+					<AbsDimension x="20" y="22"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="ATSWQueueItem2DeleteButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-11" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ATSW_MoveJobDown(this.jobindex);
+					</OnClick>
+        			<OnEnter>
+            			GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+            			GameTooltip:SetText("Move craft down the queue");
+            			GameTooltip:Show();
+        			</OnEnter>
+        			<OnLeave>
+            			GameTooltip:Hide();
+        			</OnLeave>					
+				</Scripts>
+			</Button>
+			<Button name="ATSWQueueItem2UpButton" inherits="UIPanelButtonTemplate" text="U">
+				<Size>
+					<AbsDimension x="20" y="22"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="ATSWQueueItem2DownButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ATSW_MoveJobUp(this.jobindex);
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						GameTooltip:SetText("Move craft up the queue");
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>				
+				</Scripts>
+			</Button>
+
 
 			<Frame name="ATSWQueueItem3" inherits="ATSWQueueItemButtonTemplate">
 				<Anchors>
@@ -1695,8 +1812,66 @@
 					<OnClick>
 						ATSW_DeleteJob(this.jobindex);
 					</OnClick>
+        			<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						GameTooltip:SetText("Remove craft from the queue");
+						GameTooltip:Show();
+        			</OnEnter>
+        			<OnLeave>
+            			GameTooltip:Hide();
+        			</OnLeave>					
 				</Scripts>
 			</Button>
+			<Button name="ATSWQueueItem3DownButton" inherits="UIPanelButtonTemplate" text="D">
+				<Size>
+					<AbsDimension x="20" y="22"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="ATSWQueueItem3DeleteButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-11" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ATSW_MoveJobDown(this.jobindex);
+					</OnClick>
+        			<OnEnter>
+            			GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+            			GameTooltip:SetText("Move craft down the queue");
+            			GameTooltip:Show();
+        			</OnEnter>
+        			<OnLeave>
+            			GameTooltip:Hide();
+        			</OnLeave>					
+				</Scripts>
+			</Button>
+			<Button name="ATSWQueueItem3UpButton" inherits="UIPanelButtonTemplate" text="U">
+				<Size>
+					<AbsDimension x="20" y="22"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="ATSWQueueItem3DownButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ATSW_MoveJobUp(this.jobindex);
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						GameTooltip:SetText("Move craft up the queue");
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>				
+				</Scripts>
+			</Button>			
 
 			<Frame name="ATSWQueueItem4" inherits="ATSWQueueItemButtonTemplate">
 				<Anchors>
@@ -1720,10 +1895,68 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						ATSW_DeleteJob(this.jobindex);
+						ATSW_MoveJobDown(this.jobindex);
 					</OnClick>
+        			<OnEnter>
+            			GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+            			GameTooltip:SetText("Remove craft from the queue");
+            			GameTooltip:Show();
+        			</OnEnter>
+        			<OnLeave>
+            			GameTooltip:Hide();
+        			</OnLeave>					
 				</Scripts>
 			</Button>
+			<Button name="ATSWQueueItem4DownButton" inherits="UIPanelButtonTemplate" text="D">
+				<Size>
+					<AbsDimension x="20" y="22"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="ATSWQueueItem4DeleteButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-11" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ATSW_MoveJobDown(this.jobindex);
+					</OnClick>
+        			<OnEnter>
+            			GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+            			GameTooltip:SetText("Move craft down the queue");
+            			GameTooltip:Show();
+        			</OnEnter>
+        			<OnLeave>
+            			GameTooltip:Hide();
+        			</OnLeave>					
+				</Scripts>
+			</Button>			
+			<Button name="ATSWQueueItem4UpButton" inherits="UIPanelButtonTemplate" text="U">
+				<Size>
+					<AbsDimension x="20" y="22"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="ATSWQueueItem4DownButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ATSW_MoveJobUp(this.jobindex);
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+						GameTooltip:SetText("Move craft up the queue");
+						GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>				
+				</Scripts>
+			</Button>			
 
 			<ScrollFrame name="ATSWQueueScrollFrame" inherits="ATSWQueueScrollFrameTemplate">
 				<Size>
