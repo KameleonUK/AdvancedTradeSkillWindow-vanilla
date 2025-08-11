@@ -290,3 +290,7 @@ v0.5.6
 
 v0.5.6a
 - Fix errors after RightClick on reagents
+
+v0.5.7
+- Added ability to move queued crafts up and down the queue list
+- Combined searching recipes and reagents into the default search.
