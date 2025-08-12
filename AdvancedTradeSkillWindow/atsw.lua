@@ -2235,6 +2235,14 @@ function ATSW_Filter(skillname)
 			end
 			]]
 		end
+		-- Added :craft filter to replace original search behavior where only craft recipe names were searched
+		if(parameters[i].name=="craft" or parameters[i].name=="c") then
+			-- Search only recipe names (original behavior)
+			if(string.find(string.lower(skillname),".-"..string.lower(parameters[i].value)..".-")==nil) then
+				return false;
+			end
+		end
+		--
 		if(parameters[i].name=="reagent" or parameters[i].name=="r") then
 			local index=ATSW_GetTradeSkillListPosByName(skillname);
 			if(index~=-1) then
@@ -2434,6 +2442,7 @@ function ATSW_BuildFilterDropDown()
 		[7]	= { ":maxlevel 60",			"Max Level",				":maxlevel [level]",							"Filters the list to only include recipes for items with no more than the given level requirement." },
 		[8]	= { ":maxrarity blue",		"Max Rarity",				":maxrarity [grey|white|green|blue|purple]",	"Filters the list to only include recipes for items with no more than the given rarity." },		
 		[9]	= { ":reagent ",			"Reagents",					":reagent [reagent name]",						"Filters the list to only include items that need the specified reagent." },
+		[10] = {":craft",				"Crating Recipe",			":craft: [recipe name]",						"Filters the list to only include recipes with the specific name"},
 	}
 	
 	for filter, values in ipairs(filters) do
