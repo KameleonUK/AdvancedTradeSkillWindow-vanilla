@@ -828,6 +828,22 @@ function ATSWSkillButton_OnClick(button)
 	if(button=="LeftButton") then
 		ATSWFrame_SetSelection(this:GetID(),true);
 		ATSWFrame_Update();
+		
+		-- Alt+Click to add 1x to queue
+		if(IsAltKeyDown()) then
+			local skillName, skillType, numAvailable;
+			local listpos=ATSW_GetSkillListingPos(this:GetID());
+			if(atsw_skilllisting[listpos]) then
+				skillName = atsw_skilllisting[listpos].name;
+				skillType = atsw_skilllisting[listpos].type;
+			end
+			
+			-- Only add to queue if it's not a header and has a valid skill name
+			if(skillName and skillType ~= "header") then
+				ATSW_AddJob(skillName, 1);
+				ATSWFrame_UpdateQueue();
+			end
+		end
 	end
 end
 
@@ -2484,7 +2500,7 @@ function ATSW_DisplayTradeskillTooltip()
 		skillType = atsw_skilllisting[listpos].type;
 		else
 		skillName=nil;
-		akillType=nil;
+		skillType=nil;
 	end
 	
 	if(skillName and skillType ~= "header") then
@@ -2515,6 +2531,8 @@ function ATSW_DisplayTradeskillTooltip()
 			end
 		end
 		ATSWTradeskillTooltip:AddLine(ATSW_TOOLTIP_LEGEND);
+		ATSWTradeskillTooltip:AddLine(" ");
+		ATSWTradeskillTooltip:AddLine("Alt+Click to add craft to queue (x1)");
 		
 		ATSWTradeskillTooltip:Show();
 	end
