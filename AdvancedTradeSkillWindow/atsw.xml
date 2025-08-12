@@ -1639,7 +1639,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						ATSW_MoveJobDown(this.jobindex);
+						ATSW_DeleteJob(this.jobindex);
 					</OnClick>
         			<OnEnter>
             			GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
@@ -1724,7 +1724,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						ATSW_MoveJobDown(this.jobindex);
+						ATSW_DeleteJob(this.jobindex);
 					</OnClick>
         			<OnEnter>
             			GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
