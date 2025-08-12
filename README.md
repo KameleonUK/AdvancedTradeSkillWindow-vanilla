@@ -43,6 +43,12 @@ of "green".
 
 
 ## Changelog:
+v0.5.8
+- Added ability to move queued crafts up and down the list
+- Alt left click will add x1 craft of that item to the queue
+- Changed default search behavior to search recipe names and reagents
+- added :craft predefined filter to replace original search functionality (searches crafted item names only)
+
 v0.5.7
 - Fix for scroll jumps
 - Added presets for easy filter select
