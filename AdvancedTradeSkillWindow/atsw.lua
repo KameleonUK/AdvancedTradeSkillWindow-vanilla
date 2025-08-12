@@ -1293,15 +1293,17 @@ function ATSWFrame_UpdateQueue()
 			upButton.jobindex=jobindex;
 			queueItem:Show();
 			queueButton:Show();
+			downButton:Show();
+			upButton:Show();
 			if(jobindex >= jobs) then
-				downButton:Hide();
+				downButton:Disable();
 			else
-				downButton:Show();
+				downButton:Enable();
 			end
 			if(jobindex <= 1) then
-				upButton:Hide();
+				upButton:Disable();
 			else
-				upButton:Show();
+				upButton:Enable();
 			end
 		else
 			queueButton:Hide();
